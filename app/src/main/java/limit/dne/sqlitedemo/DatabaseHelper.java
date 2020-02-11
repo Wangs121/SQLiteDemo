@@ -72,4 +72,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, "NAME = ?", new String[] {name});
     }
+
+    public Cursor getOneData(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String Query = "Select * from " + TABLE_NAME + " where NAME = " + "'" + name + "'";
+        Cursor data = db.rawQuery(Query,null);
+//        String sql = "SELECT EXISTS (SELECT * FROM"
+        return data;
+    }
+    public boolean checkDataExists(String name){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String Query = "Select * from " + TABLE_NAME + " where NAME = " + "'" + name + "'";
+        Cursor data = db.rawQuery(Query,null);
+        if(data.getCount() <=0){
+            //data.close();
+            return false;
+        }
+        return true;
+    }
+
+    public Integer EmptyDatabase(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, null, null);
+    }
 }

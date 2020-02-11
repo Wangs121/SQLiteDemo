@@ -22,6 +22,8 @@ public class MainActivity extends AppCompatActivity {
     Button view;
     Button update;
     Button delete;
+    Button check;
+    Button clear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
         delete = (Button) findViewById(R.id.buttonDelete);
         update = (Button) findViewById(R.id.buttonUpdate);
         view = (Button) findViewById(R.id.buttonView);
+        check = (Button) findViewById(R.id.buttonCheck);
+        clear = (Button) findViewById(R.id.buttonClear);
 
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,14 +66,32 @@ public class MainActivity extends AppCompatActivity {
                 viewData();
             }
         });
+        check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getOneData();
+            }
+        });
+        clear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dh.EmptyDatabase();
+            }
+        });
     }
 
     public void addData(){
-        boolean success = dh.insertData(name.getText().toString(), email.getText().toString(), password.getText().toString());
-        if (success){
-            Toast.makeText(this, "Data Insertion Successfull", Toast.LENGTH_LONG).show();
-        } else {
-            Toast.makeText(this, "Data Insertion Failed", Toast.LENGTH_LONG).show();
+        //if data exist, update it
+        if(dh.checkDataExists(name.getText().toString())){
+            updateData();
+        }
+        else{
+            boolean success = dh.insertData(name.getText().toString(), email.getText().toString(), password.getText().toString());
+            if (success){
+                Toast.makeText(this, "Data Insertion Successfull", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Data Insertion Failed", Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -107,5 +129,20 @@ public class MainActivity extends AppCompatActivity {
     public void updateData(){
         dh.updateData(name.getText().toString(), email.getText().toString(), password.getText().toString());
         Toast.makeText(this, "Updated", Toast.LENGTH_LONG).show();
+    }
+
+    public void getOneData(){
+        Cursor data = dh.getOneData(id.getText().toString());
+        if(data.getCount()<=0){
+            //doesn't exist
+            dialog("Data", "data doesn't exist");
+        }else{
+            StringBuffer stringBuffer = new StringBuffer();
+            data.moveToNext();
+            stringBuffer.append("\nName: " + data.getString(0));
+            stringBuffer.append("\nEmail: " + data.getString(1));
+            stringBuffer.append("\nPassword: " + data.getString(2) + "\n");
+            dialog("Data", stringBuffer.toString());
+        }
     }
 }

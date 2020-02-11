@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+        app:layout_constraintVertical_bias="0" />
 
     <EditText
         android:id="@+id/editTextName"
@@ -115,7 +115,7 @@
         app:layout_constraintHorizontal_bias="0.19"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/editTextID"
-        app:layout_constraintVertical_bias="0.189"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintWidth_percent="0.35" />
 
     <Button
@@ -132,7 +132,7 @@
         app:layout_constraintHorizontal_bias="0.802"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextID"
-        app:layout_constraintVertical_bias="0.189"
+        app:layout_constraintVertical_bias="0"
         app:layout_constraintWidth_percent="0.35" />
 
     <Button
@@ -163,6 +163,36 @@
         app:layout_constraintStart_toStartOf="@id/buttonUpdate"
         app:layout_constraintEnd_toEndOf="@id/buttonUpdate"
         app:layout_constraintTop_toBottomOf="@id/buttonUpdate"
+        app:layout_constraintWidth_percent="0.35"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonCheck"
+        android:theme="@style/Button"
+        android:background="#0FDB17"
+        android:text="@string/check"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toStartOf="@id/buttonUpdate"
+        app:layout_constraintEnd_toEndOf="@id/buttonUpdate"
+        app:layout_constraintTop_toBottomOf="@id/buttonView"
+        app:layout_constraintWidth_percent="0.35"/>
+
+    <Button
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonClear"
+        android:theme="@style/Button"
+        android:background="#0FDB17"
+        android:text="@string/clear"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintStart_toStartOf="@id/buttonDelete"
+        app:layout_constraintEnd_toEndOf="@id/buttonDelete"
+        app:layout_constraintTop_toBottomOf="@id/buttonView"
         app:layout_constraintWidth_percent="0.35"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
